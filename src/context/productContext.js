@@ -50,7 +50,7 @@ const ProductContext = ({ children }) => {
     }
   }
 
-  async function getProducts() {
+  async function getProducts({ id }) {
     try {
       const tokens = JSON.parse(localStorage.getItem("tokens"));
       const Authorization = `Bearer ${tokens.access}`;
@@ -59,7 +59,7 @@ const ProductContext = ({ children }) => {
           Authorization,
         },
       };
-      const url = `${API}/products${window.location.search}`;
+      const url = `${API}/products/?category=${id}`;
 
       const res = await axios(url, config);
       dispatch({
@@ -137,22 +137,20 @@ const ProductContext = ({ children }) => {
     }
   }
 
+  const values = {
+    createProduct,
+    getProducts,
+    getOneProduct,
+    getCategories,
+    editProduct,
+    deleteProduct,
+    categories: state.categories,
+    products: state.products,
+    oneProduct: state.oneProduct,
+  };
+
   return (
-    <productContext.Provider
-      value={{
-        createProduct,
-        getProducts,
-        getOneProduct,
-        getCategories,
-        editProduct,
-        deleteProduct,
-        categories: state.categories,
-        products: state.products,
-        oneProduct: state.oneProduct,
-      }}
-    >
-      {children}
-    </productContext.Provider>
+    <productContext.Provider value={values}>{children}</productContext.Provider>
   );
 };
 

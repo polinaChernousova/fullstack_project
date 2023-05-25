@@ -46,6 +46,8 @@ const EditProduct = () => {
     navigate("/");
   };
 
+  console.log(categories);
+
   return (
     <>
       {product ? (

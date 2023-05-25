@@ -6,10 +6,15 @@ const CardProduct = ({ item }) => {
   const navigate = useNavigate();
   const { deleteProduct } = useContext(productContext);
   return (
-    <ul>
-      <li>{item.title};</li>
-      <li>{item.price}$;</li>
-      <li>{item.category.title}</li>
+    <ul style={{ listStyleType: "none" }}>
+      <li>
+        <strong>Title: </strong> {item.title};
+      </li>
+      <li>
+        <strong>Price: </strong>
+        {item.price}$;
+      </li>
+      <li>Category: {item.category.title}</li>
       <button onClick={() => navigate(`/edit/${item.id}`)}>Edit</button>
       <button onClick={() => deleteProduct(item.id)}>Delete</button>
     </ul>
